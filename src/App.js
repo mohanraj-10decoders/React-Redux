@@ -9,10 +9,15 @@ function App() {
   const [movies, setMovies] = useState([]);
   const dispatch = useDispatch();
 
-  const getMovies = () => {
-    fetch('https://62cfe492d9bf9f17057e92ff.mockapi.io/movies')
-      .then((data) => data.json())
-      .then((res) => setMovies([...res]));
+  const getMovies = async () => {
+    // fetch('https://62cfe492d9bf9f17057e92ff.mockapi.io/movies')
+    //   .then((data) => data.json())
+    //   .then((res) => setMovies([...data]));
+    let result = await fetch(
+      'https://62cfe492d9bf9f17057e92ff.mockapi.io/movies'
+    );
+    let data = await result.json();
+    setMovies([...data]);
   };
   const addMovie = () => {
     axios
@@ -67,7 +72,7 @@ function App() {
           )
         }
       >
-        ADD
+        ADD Employee
       </button>
       <section className='section'>
         {employee.map((emp) => {
