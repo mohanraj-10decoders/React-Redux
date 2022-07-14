@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from './counter';
+import employerReducer from './employee';
 
 export default configureStore({
   reducer: {
-    counter: counterReducer,
+    employer: employerReducer,
   },
 });
