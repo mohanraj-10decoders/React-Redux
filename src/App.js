@@ -1,10 +1,57 @@
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD, DELETE } from './Redux/employee';
+import { useState } from 'react';
+import axios from 'axios';
 
 function App() {
   const { employee } = useSelector((state) => state.employer);
+  const [movies, setMovies] = useState([]);
   const dispatch = useDispatch();
+
+  const getMovies = () => {
+    fetch('https://62cfe492d9bf9f17057e92ff.mockapi.io/movies')
+      .then((data) => data.json())
+      .then((res) => setMovies([...res]));
+  };
+  const addMovie = () => {
+    axios
+      .post('https://62cfe492d9bf9f17057e92ff.mockapi.io/movies', {
+        name: `Movie ${movies.length + 1}`,
+        language: 'English',
+        rating: 9,
+        year: 2022,
+      })
+      .then((res) => {
+        console.log('api post response', res);
+        if (res.status == 201) {
+          getMovies();
+        }
+      });
+  };
+  const editMovie = (id) => {
+    axios
+      .put(`https://62cfe492d9bf9f17057e92ff.mockapi.io/movies/${id}`, {
+        name: 'Edited',
+        language: 'Tamil',
+        rating: 5,
+        year: 2016,
+      })
+      .then((res) => {
+        if (res.status == 200) {
+          getMovies();
+        }
+      });
+  };
+  const deleteMovie = (id) => {
+    axios
+      .delete(`https://62cfe492d9bf9f17057e92ff.mockapi.io/movies/${id}`)
+      .then((res) => {
+        if (res.status == 200) {
+          getMovies();
+        }
+      });
+  };
   return (
     <div className='App'>
       <p>Employee details</p>
@@ -48,6 +95,39 @@ function App() {
           );
         })}
       </section>
+      <button onClick={() => getMovies()} className='getMoviesbutton'>
+        GET MOVIES
+      </button>
+      {!!movies.length && (
+        <section className='allMoviesContainer'>
+          <button onClick={() => addMovie()} className='addMovieButton'>
+            Add movie
+          </button>
+          <div className='allMovies'>
+            {movies.map((movie) => {
+              return (
+                <span className='movie' key={movie.id}>
+                  {movie.name}
+                  <button
+                    className='movieEditbutton'
+                    onClick={() => editMovie(movie.id)}
+                  >
+                    {' '}
+                    EDIT
+                  </button>
+                  <button
+                    className='movieDeleteButton'
+                    onClick={() => deleteMovie(movie.id)}
+                  >
+                    {' '}
+                    DEL
+                  </button>
+                </span>
+              );
+            })}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

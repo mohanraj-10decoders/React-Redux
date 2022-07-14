@@ -37,3 +37,37 @@ span{
   width: 50px;
   float: right;
 }
+.allMovies{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+}
+.movie{
+  width: 200px;
+  padding: 20px;
+  background-color: lightgray;
+}
+.addMovieButton, .getMoviesbutton{
+  background-color: blue;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+.getMoviesbutton {
+  background-color: green;
+}
+.movieEditbutton, .movieDeleteButton{
+ margin-left: 10px;
+ border: none;
+ background-color: lightcoral;
+ border-radius: 2px;
+}
+.movieEditbutton{
+  background-color: lightblue;
+}
+button:hover{
+  cursor: pointer;
+}
