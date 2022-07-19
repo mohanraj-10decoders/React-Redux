@@ -35,18 +35,28 @@
 }
 span{
   width: 50px;
-  float: right;
+  /* float: right; */
 }
 .allMovies{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
   gap: 20px;
+}
+.movieCard{
+  background-color: lightgray;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 5px;
 }
 .movie{
   width: 200px;
   padding: 20px;
-  background-color: lightgray;
+}
+.buttons{
+  margin: 10px 20px;
 }
 .addMovieButton, .getMoviesbutton{
   background-color: blue;
@@ -70,4 +80,16 @@ span{
 }
 button:hover{
   cursor: pointer;
+}
+.errorMessage{
+  font-size: 0.8rem;
+  color: red;
+  width: 100vh;
+  height: 20px;
+  margin: auto;
+  text-align: center;
+}
+.span{
+  width: max-content;
+  text-align: center !important;
 }
